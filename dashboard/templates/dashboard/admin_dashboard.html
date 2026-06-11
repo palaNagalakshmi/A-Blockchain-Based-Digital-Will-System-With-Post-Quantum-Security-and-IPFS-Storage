@@ -1,0 +1,20 @@
+{% extends 'dashboard/home.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h1><i class="fas fa-user-shield me-2"></i>Admin Dashboard</h1>
+
+<div class="row">
+    {% for testator in testators %}
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <h4><i class="fas fa-user me-1"></i>{{ testator.name }}</h4>
+            <p><i class="fas fa-envelope me-1"></i>{{ testator.email }}</p>
+            <a href="{% url 'testator_detail' testator.id %}" class="btn-custom"><i class="fas fa-eye me-1"></i>View Details</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>No testators available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

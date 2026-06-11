@@ -1,0 +1,64 @@
+<h2>Beneficiaries</h2>
+<ul>
+    {% for b in will.beneficiaries.all %}
+        <li>{{ b.name }}</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<h2>Asset Distributions</h2>
+
+<table border="1" style="width:100%; text-align:center;">
+    <tr style="background-color:#1976d2; color:white;">
+        <th>Asset</th>
+        <th>Beneficiary</th>
+        <th>Share %</th>
+    </tr>
+
+    {% for d in distributions %}
+    <tr>
+        <td>{{ d.asset.name }}</td>
+        <td>{{ d.beneficiary.name }}</td>
+        <td>{{ d.share_percentage }}%</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<h2>Generated Will PDF</h2>
+{% if will.will_document %}
+    <a href="{{ will.will_document.url }}" target="_blank">View PDF</a>
+{% endif %}
+
+<hr>
+
+<h2>IPFS Hash</h2>
+<p>{{ will.ipfs_hash }}</p>
+
+{% if will.ipfs_hash %}
+<a href="https://gateway.pinata.cloud/ipfs/{{ will.ipfs_hash }}" target="_blank">
+    🔗 View on IPFS
+</a>
+{% endif %}
+
+<hr>
+
+<h2>Post-Quantum Signature</h2>
+
+{% if will.pq_signature %}
+<p style="color:green;">✔ Signed & Secured (Falcon-512)</p>
+{% else %}
+<p style="color:red;"> Not Signed</p>
+{% endif %}
+{% if messages %}
+    {% for message in messages %}
+        <p style="color:red;">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+<a href="{% url 'create_death_certificate' will.id %}">
+    <button style="padding:10px 20px; background-color:red; color:white; border:none; border-radius:5px;">
+        Create Death Certificate
+    </button>
+</a>

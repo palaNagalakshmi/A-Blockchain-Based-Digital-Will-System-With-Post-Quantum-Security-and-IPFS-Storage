@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}InheritChain{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Segoe UI';
+            margin: 20px;
+            background-color: #f4f6f9;
+        }
+
+        nav {
+            display:flex;
+            gap:15px;
+            margin-bottom:30px;
+            align-items:center;
+        }
+
+        nav a {
+            padding:10px 18px;
+            background:#007BFF;
+            color:white;
+            text-decoration:none;
+            border-radius:6px;
+            font-weight:bold;
+        }
+
+        nav a:hover {
+            background:#0056b3;
+        }
+
+        .wallet-box {
+            margin-left:auto;
+            background:#222;
+            color:#fff;
+            padding:8px 15px;
+            border-radius:6px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 🔥 NAVIGATION BAR -->
+<nav>
+    <a href="/">🏠 Home</a>
+    <a href="{% url 'admin_dashboard' %}">👤 Testator</a>
+    <a href="{% url 'beneficiary_dashboard' %}">👥 Beneficiary</a>
+    <a href="{% url 'create_will' %}">➕ Create Will</a>
+
+    <div class="wallet-box">
+        🔗 Blockchain Enabled
+    </div>
+</nav>
+
+<!-- 🔥 MAIN CONTENT -->
+{% block content %}{% endblock %}
+
+</body>
+</html>

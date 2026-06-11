@@ -1,0 +1,23 @@
+{% extends "dashboard/home.html" %}
+
+{% block content %}
+
+<h2>Testator: {{ testator.name }}</h2>
+
+<table border="1" cellpadding="10">
+<tr>
+    <th>Will ID</th>
+    <th>Status</th>
+    <th>Blockchain TX</th>
+</tr>
+
+{% for will in wills %}
+<tr>
+    <td>{{ will.id }}</td>
+    <td>{{ will.status }}</td>
+    <td>{{ will.blockchain_tx }}</td>
+</tr>
+{% endfor %}
+
+
+{% endblock %}

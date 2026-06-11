@@ -1,0 +1,98 @@
+<form method="POST">
+{% csrf_token %}
+<h2>Will Creation</h2>
+<h3>Select Testator</h3>
+<select name="testator" onchange="this.form.submit()">
+    <option value="">Select Testator</option>
+    {% for t in testators %}
+        <option value="{{ t.id }}" {% if t.id|stringformat:"s" == selected_testator %}selected{% endif %}>
+            {{ t.name }}
+        </option>
+    {% endfor %}
+</select>
+
+<h3>Select Beneficiaries</h3>
+<select name="beneficiary_name">
+    {% for b in beneficiaries %}
+        <option value="{{ b.id }}">{{ b.name }}</option>
+    {% endfor %}
+</select>
+
+<hr>
+
+<h3>Assets & Distribution</h3>
+
+<table border="1" id="distributionTable">
+    <tr>
+        <th>Asset</th>
+        <th>Beneficiary</th>
+        <th>Share %</th>
+        <th>Action</th>
+    </tr>
+
+    <tr>
+        <td>
+            <select name="asset_name">
+                <option value="">Select Asset</option>
+                {% for asset in assets %}
+                    <option value="{{ asset.id }}">{{ asset.name }}</option>
+                {% endfor %}
+            </select>
+        </td>
+
+        <td>
+            <select name="beneficiary_name">
+                {% for b in beneficiaries %}
+                    <option value="{{ b.id }}">{{ b.name }}</option>
+                {% endfor %}
+            </select>
+        </td>
+
+        <td>
+            <input type="number" name="share" placeholder="%" required>
+        </td>
+
+        <td>
+            <button type="button" onclick="removeRow(this)">❌</button>
+        </td>
+    </tr>
+</table>
+
+<br>
+<button type="button" onclick="addRow()">➕ Add Distribution</button>
+
+<br><br>
+<button type="submit">🚀 Save & Generate Will</button>
+</form>
+
+<script>
+function addRow() {
+    let table = document.getElementById("distributionTable");
+    let row = table.insertRow();
+
+    row.innerHTML = `
+        <td>
+            <select name="asset_name">
+                {% for asset in assets %}
+                <option value="{{ asset.id }}">{{ asset.name }}</option>
+                {% endfor %}
+            </select>
+        </td>
+
+        <td>
+            <select name="beneficiary_name">
+                {% for b in beneficiaries %}
+                <option value="{{ b.id }}">{{ b.name }}</option>
+                {% endfor %}
+            </select>
+        </td>
+
+        <td><input type="number" name="share" required></td>
+        <td><button type="button" onclick="removeRow(this)">❌</button></td>
+    `;
+}
+
+function removeRow(btn) {
+    btn.closest("tr").remove();
+}
+</script>

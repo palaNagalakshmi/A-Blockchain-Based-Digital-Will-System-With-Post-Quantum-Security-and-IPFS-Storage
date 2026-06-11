@@ -1,0 +1,19 @@
+<h2>Death Certificate Generated </h2>
+
+<p>Certificate No: {{ dc.certificate_number }}</p>
+
+<a href="{{ dc.certificate_file.url }}" target="_blank">
+    View Death Certificate
+</a>
+<br><br>
+<br><br>
+
+<a href="{% url 'upload_certificate' %}">
+    Upload Certificate for Verification
+</a><br><br>
+
+{% if dc.will %}
+    <a href="{% url 'claim_inheritance' dc.will.id %}">
+         Claim Assets
+    </a>
+{% endif %}

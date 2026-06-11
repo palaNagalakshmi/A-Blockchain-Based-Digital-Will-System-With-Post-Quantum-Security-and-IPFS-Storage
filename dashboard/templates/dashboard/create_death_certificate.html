@@ -1,0 +1,22 @@
+<form method="POST">
+    {% csrf_token %}
+
+    <h2>Death Certificate Form</h2>
+
+    Aadhaar: <input type="text" name="aadhaar" required><br><br>
+    Name: <input  type="text" name="name" required><br><br>
+    Father/Husband Name: <input type="text" name="father_name" required><br><br>
+    Gender:
+    <select name="gender">
+        <option>Male</option>
+        <option>Female</option>
+    </select><br><br>
+
+    
+    Address: <input type="text" name="address"><br><br>
+    
+    Date of Death: <input type="date" name="date_of_death"><br><br>
+    Date of Registration: <input type="date" name="date_of_registration"><br><br>
+
+    <button type="submit">Generate Certificate</button>
+</form>

@@ -1,0 +1,13 @@
+<h2>Certificate Verification</h2>
+
+<p><b>Certificate No:</b> {{ dc.certificate_number }}</p>
+<p><b>Will ID:</b> {{ dc.will.id }}</p>
+<p><b>Aadhaar:</b> {{ dc.aadhaar }}</p>
+<p style="color:green;"><b>Status: VERIFIED ✅</b></p>
+
+{% if dc.ipfs_hash %}
+<p><b>IPFS:</b> {{ dc.ipfs_hash }}</p>
+<a href="https://gateway.pinata.cloud/ipfs/{{ dc.ipfs_hash }}" target="_blank">
+    View on IPFS
+</a>
+{% endif %}
